@@ -6,15 +6,13 @@ FROM product
 INNER JOIN product_type ON product.PRODUCT_TYPE_CD = product_type.PRODUCT_TYPE_CD;
 
 -- 2. For each branch, list the branch name and city, plus the last name and title of each employee who works in that branch.
-SELECT branch.NAME as `Name`,
-branch.CITY as `City`,
-e1.LAST_NAME as `Superior's Last Name`,
-e1.TITLE as `Superior's Title`
-INNER JOIN branch as b ON employee.EMP_ID = -- TODO: finish this answer
+SELECT b.NAME as `Name`, b.CITY as `City`, e.LAST_NAME as `Last Name`, e.TITLE as `Title`
+FROM branch as b
+INNER JOIN employee as e ON b.BRANCH_ID = e.ASSIGNED_BRANCH_ID -- TODO: finish this answer
 
 -- 3. Show a list of each unique employee title.
-SELECT TITLE AS `Titles` FROM employee
-GROUP BY Title;
+SELECT DISTINCT TITLE AS `Titles` FROM employee
+-- GROUP BY Title;
 
 -- 4. Show the last name and title of each employee, along with the last name and title of that employee's boss.
 SELECT employee.LAST_NAME as `Last Name`, employee.TITLE as `Title`, e1.LAST_NAME as `Superior's Last Name`, e1.TITLE as `Superior's Title`
